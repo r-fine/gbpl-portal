@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField
+from django.db.models import CharField, EmailField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -13,8 +13,11 @@ class User(AbstractUser):
 
     #: First and last name do not cover name patterns around the globe
     name = CharField(_("Name of User"), blank=True, max_length=255)
+    email = EmailField(verbose_name='E-mail Address', unique=True)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     def get_absolute_url(self):
         """Get url for user's detail view.
@@ -24,3 +27,8 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+    
+
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'

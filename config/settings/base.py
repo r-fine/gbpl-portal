@@ -45,6 +45,7 @@ DATABASES = {
         default="postgres:///geniemode_portal",
     ),
 }
+
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -79,7 +80,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "geniemode_portal.users",
+    "geniemode_portal.apps.users",
+    "geniemode_portal.apps.attendance",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -183,7 +185,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "geniemode_portal.users.context_processors.allauth_settings",
+                "geniemode_portal.apps.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -261,7 +263,7 @@ if USE_TZ:
     # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-timezone
     CELERY_TIMEZONE = TIME_ZONE
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-broker_url
-CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = "redis://localhost:6379/0"
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#result-extended
@@ -299,13 +301,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "geniemode_portal.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "geniemode_portal.apps.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "geniemode_portal.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "geniemode_portal.apps.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "geniemode_portal.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "geniemode_portal.apps.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "geniemode_portal.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "geniemode_portal.apps.users.forms.UserSocialSignupForm"}
 
 
 # Your stuff...

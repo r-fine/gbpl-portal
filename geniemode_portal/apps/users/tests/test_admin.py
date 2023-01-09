@@ -1,6 +1,6 @@
 from django.urls import reverse
 
-from geniemode_portal.users.models import User
+from geniemode_portal.apps.users.models import User
 
 
 class TestUserAdmin:
