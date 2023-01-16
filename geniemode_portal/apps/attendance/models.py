@@ -5,8 +5,8 @@ from geniemode_portal.apps.users.models import User
 
 
 DAYS = (
-    ('Mon', 'Monday'), ('Tue', 'Tuesday'), ('Wed', 'Wednesday'), ('Thu',
-                                                                  'Thursday'), ('Fri', 'Friday'), ('Sat', 'Saturday'), ('Sun', 'Sunday'),
+    ('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday',
+                                                                  'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'),
 )
 
 
@@ -16,7 +16,7 @@ class Attendance(models.Model):
 
     day = models.CharField(_("Day"), choices=DAYS, max_length=10)
 
-    date = models.DateField(_("Date"), auto_now=False, auto_now_add=False)
+    date = models.DateField(_("Date"), auto_now=False, auto_now_add=True, editable=False)  # auto_now_add=True --> Automatically set the field to now when the object is first created.
 
     regular_hours = models.CharField(_("Regular Hours"), max_length=50, blank=True)
 
@@ -48,7 +48,7 @@ class Attendance(models.Model):
 
     def __str__(self):
 
-        return self.user.full_name
+        return self.user.name
 
     def get_absolute_url(self):
 

@@ -7,9 +7,9 @@ from .models import Attendance
 class AttendanceAdmin(admin.ModelAdmin):
     '''Admin View for Attendance'''
 
-    list_display = ('user', 'date', 'is_present', 'status')
+    list_display = ('user', 'day', 'date', 'is_present', 'status', 'remarks')
     list_filter = ('date',)
     readonly_fields = ('created_at',)
     search_fields = ('user',)
-    list_editable = ('is_present', 'status')
+    list_editable = ('is_present', 'status', 'remarks')
     list_per_page = 25
