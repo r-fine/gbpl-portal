@@ -4,14 +4,14 @@ How To - Project Documentation
 Get Started
 ----------------------------------------------------------------------
 
-Documentation can be written as rst files in `geniemode_portal/docs`.
+Documentation can be written as rst files in `geniemode_attendance/docs`.
 
 
 To build and serve docs, use the command::
     
     make livehtml 
     
-from inside the `geniemode_portal/docs` directory. 
+from inside the `geniemode_attendance/docs` directory. 
 
 
 Changes to files in `docs/_source` will be picked up and reloaded automatically.

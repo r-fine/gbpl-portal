@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from geniemode_portal.apps.users.models import User
+from geniemode_attendance.apps.users.models import User
 
 
 DAYS = (

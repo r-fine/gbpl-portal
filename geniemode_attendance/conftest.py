@@ -1,7 +1,7 @@
 import pytest
 
-from geniemode_portal.apps.users.models import User
-from geniemode_portal.apps.users.tests.factories import UserFactory
+from geniemode_attendance.apps.users.models import User
+from geniemode_attendance.apps.users.tests.factories import UserFactory
 
 
 @pytest.fixture(autouse=True)

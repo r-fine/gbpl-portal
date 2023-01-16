@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from geniemode_portal.apps.attendance.models import Attendance
+from geniemode_attendance.apps.attendance.models import Attendance
 
 import datetime
 

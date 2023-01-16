@@ -1,6 +1,6 @@
 from django.urls import path
 
-from geniemode_portal.apps.users.views import (
+from geniemode_attendance.apps.users.views import (
     user_detail_view,
     user_redirect_view,
     user_update_view,

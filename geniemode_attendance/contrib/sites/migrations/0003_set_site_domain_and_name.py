@@ -46,7 +46,7 @@ def update_site_forward(apps, schema_editor):
         Site,
         schema_editor.connection,
         "example.com",
-        "Geniemode Portal",
+        "Geniemode Attendance",
     )
 
 

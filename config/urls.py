@@ -13,8 +13,8 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("geniemode_portal.apps.users.urls", namespace="users")),
-    path("attendance/", include("geniemode_portal.apps.attendance.urls", namespace="attendance")),
+    path("users/", include("geniemode_attendance.apps.users.urls", namespace="users")),
+    path("attendance/", include("geniemode_attendance.apps.attendance.urls", namespace="attendance")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

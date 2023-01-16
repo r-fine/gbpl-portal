@@ -62,8 +62,7 @@ target/
 # pyenv
 .python-version
 
-# celery beat schedule file
-celerybeat-schedule
+
 
 # Environments
 .venv
@@ -269,13 +268,13 @@ Session.vim
 # Auto-generated tag files
 tags
 
+# Redis dump file
+dump.rdb
+
 ### Project template
-geniemode_portal/media/
+geniemode_attendance/media/
 
 .pytest_cache/
-.env
-.envs/*
-!.envs/.local/
 
 # DB
 db.sqlite3

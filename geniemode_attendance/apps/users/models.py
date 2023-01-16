@@ -10,7 +10,7 @@ DESIGNATION = (('X', 'X'), ('Y', 'Y'), ('Z', 'Z'),)
 
 class User(AbstractUser):
     """
-    Default custom user model for Geniemode Portal.
+    Default custom user model for Geniemode Attendance.
     If adding fields that need to be filled at user signup,
     check forms.SignupForm and forms.SocialSignupForms accordingly.
     """

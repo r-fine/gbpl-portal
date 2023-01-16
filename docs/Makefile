@@ -7,7 +7,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = ./_build
-APP = ../geniemode_portal
+APP = ../geniemode_attendance
 
 
 .PHONY: help livehtml apidocs Makefile

@@ -8,10 +8,10 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 
-from geniemode_portal.apps.users.forms import UserAdminChangeForm
-from geniemode_portal.apps.users.models import User
-from geniemode_portal.apps.users.tests.factories import UserFactory
-from geniemode_portal.apps.users.views import (
+from geniemode_attendance.apps.users.forms import UserAdminChangeForm
+from geniemode_attendance.apps.users.models import User
+from geniemode_attendance.apps.users.tests.factories import UserFactory
+from geniemode_attendance.apps.users.views import (
     UserRedirectView,
     UserUpdateView,
     user_detail_view,

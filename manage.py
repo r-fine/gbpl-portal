@@ -24,8 +24,8 @@ if __name__ == "__main__":
         raise
 
     # This allows easy placement of apps within the interior
-    # geniemode_portal directory.
+    # geniemode_attendance directory.
     current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "geniemode_portal"))
+    sys.path.append(str(current_path / "geniemode_attendance"))
 
     execute_from_command_line(sys.argv)
