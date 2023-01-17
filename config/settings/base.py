@@ -279,9 +279,9 @@ ACCOUNT_ADAPTER = "geniemode_attendance.apps.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 ACCOUNT_FORMS = {"signup": "geniemode_attendance.apps.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "geniemode_attendance.apps.users.adapters.SocialAccountAdapter"
+# SOCIALACCOUNT_ADAPTER = "geniemode_attendance.apps.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "geniemode_attendance.apps.users.forms.UserSocialSignupForm"}
+# SOCIALACCOUNT_FORMS = {"signup": "geniemode_attendance.apps.users.forms.UserSocialSignupForm"}
 
 
 # Your stuff...
