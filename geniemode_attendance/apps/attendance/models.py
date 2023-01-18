@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 from geniemode_attendance.apps.users.models import User
 
@@ -50,6 +51,5 @@ class Attendance(models.Model):
 
         return self.user.name
 
-    def get_absolute_url(self):
-
-        return ('')
+    def get_update_url(self):
+        return reverse('attendance:update', args=[self.pk])

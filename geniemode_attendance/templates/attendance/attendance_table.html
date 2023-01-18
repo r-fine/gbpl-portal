@@ -8,8 +8,16 @@
     <div class="container">
       <h2 class="text-primary text-center fw-bolder mb-3">Attendance History</h2>
       <div class="container">
-        {% render_table table "./attendance/mytable.html" %}
+        {% render_table table './attendance/mytable.html' %}
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function ($) {
+      $("td[data-href*='/attendance/update/']").click(function () {
+        window.location = $(this).data('href')
+      })
+    })
+  </script>
 {% endblock %}
