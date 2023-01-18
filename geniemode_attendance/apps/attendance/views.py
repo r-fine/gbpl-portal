@@ -6,9 +6,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
+from django_tables2 import SingleTableView, LazyPaginator
 
 from .forms import AttendaceForm
 from .models import Attendance
+from .tables import AttendanceTable
 
 import datetime
 
@@ -33,4 +35,21 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
         return context
 
+
 attendance_create_view = AttendanceCreateView.as_view()
+
+
+class AttendaceTableView(SingleTableView):
+    model = Attendance
+    table_class = AttendanceTable
+    template_name = "attendance/attendance_table.html"
+    paginator_class = LazyPaginator
+    table_pagination = {
+        "per_page": 30
+    }
+
+    def get_table_data(self):
+        return Attendance.objects.filter(user=self.request.user)
+
+
+attendance_table_view = AttendaceTableView.as_view()
