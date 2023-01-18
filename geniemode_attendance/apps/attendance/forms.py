@@ -9,7 +9,7 @@ import datetime
 class AttendaceForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = ('day', 'in_time', 'out_time', 'work_from_home', 'out_office_from', 'out_office_to', 'out_reason')
+        fields = ('in_time', 'out_time', 'work_from_home', 'out_office_from', 'out_office_to', 'out_reason')
         widgets = {
             'in_time': forms.TimeInput(attrs={'type': 'time', }),
             'out_time': forms.TimeInput(attrs={'type': 'time'}),

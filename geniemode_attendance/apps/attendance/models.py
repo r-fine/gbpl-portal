@@ -16,7 +16,7 @@ class Attendance(models.Model):
 
     day = models.CharField(_("Day"), choices=DAYS, max_length=10)
 
-    date = models.DateField(_("Date"), auto_now=False, auto_now_add=True, editable=False)  # auto_now_add=True --> Automatically set the field to now when the object is first created.
+    date = models.DateField(_("Date"), auto_now=False, auto_now_add=False)
 
     regular_hours = models.CharField(_("Regular Hours"), max_length=50, blank=True)
 
