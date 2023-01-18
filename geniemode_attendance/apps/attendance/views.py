@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -50,12 +50,39 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         is_done = Attendance.objects.filter(user=self.request.user, date=datetime.datetime.now()).exists()
-        context.update({'is_done': is_done})
+        context.update({
+            'is_done': is_done,
+            'form_title_header': 'Submit',
+            'button_name': 'Submit',
+            'day': datetime.datetime.now().strftime("%A"),
+            'date': datetime.date.today()
+        })
 
         return context
 
 
 attendance_create_view = AttendanceCreateView.as_view()
+
+
+class AttendanceUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Attendance
+    form_class = AttendaceForm
+    success_url = reverse_lazy('home')
+    success_message = 'Eentry updated successfully'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'form_title_header': 'Update',
+            'button_name': 'Update',
+            'day': self.object.day,
+            'date': self.object.date,
+        })
+
+        return context
+
+
+attendance_update_view = AttendanceUpdateView.as_view()
 
 
 class AttendaceTableView(LoginRequiredMixin, SingleTableView):
