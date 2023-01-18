@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 
 from django_tables2 import SingleTableView, LazyPaginator
@@ -64,7 +64,7 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 attendance_create_view = AttendanceCreateView.as_view()
 
 
-class AttendanceUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class AttendanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Attendance
     form_class = AttendaceForm
     success_url = reverse_lazy('home')
@@ -80,6 +80,12 @@ class AttendanceUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         })
 
         return context
+
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user == obj.user:
+            return True
+        return False
 
 
 attendance_update_view = AttendanceUpdateView.as_view()
