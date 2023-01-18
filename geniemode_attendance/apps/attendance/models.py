@@ -2,16 +2,20 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
+from uuid import uuid4
+
 from geniemode_attendance.apps.users.models import User
 
 
 DAYS = (
     ('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday',
-                                                                  'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'),
+                                                                               'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'),
 )
 
 
 class Attendance(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
 

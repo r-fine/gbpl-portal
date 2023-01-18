@@ -7,6 +7,6 @@ from .views import (
 app_name = "attendance"
 urlpatterns = [
     path('create/', view=attendance_create_view, name='create'),
-    path('update/<int:pk>/', view=attendance_update_view, name='update'),
+    path('update/<uuid:pk>/', view=attendance_update_view, name='update'),
     path('history/', view=attendance_table_view, name='table'),
 ]
