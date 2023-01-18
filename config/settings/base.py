@@ -84,6 +84,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     # "allauth.socialaccount",
     "widget_tweaks",
+    "django_tables2",
 ]
 
 LOCAL_APPS = [

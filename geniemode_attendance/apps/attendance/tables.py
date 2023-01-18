@@ -10,7 +10,7 @@ class AttendanceTable(tables.Table):
         'td': {'data-href': lambda record: record.get_update_url}
     }
     update = tables.Column(
-        attrs=updatable, orderable=False,
+        attrs=updatable,
         default=mark_safe(
             '''
             <button class="btn btn-sm">
@@ -22,6 +22,7 @@ class AttendanceTable(tables.Table):
             '''
         )
     )
+    date = tables.Column(orderable=True)
 
     class Meta:
         model = Attendance
@@ -34,6 +35,7 @@ class AttendanceTable(tables.Table):
             'id': 'myTable',
         }
         order_by = 'id'
+        orderable = False
 
     def before_render(self, request):
         """
