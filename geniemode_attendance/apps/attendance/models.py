@@ -20,9 +20,9 @@ class Attendance(models.Model):
 
     regular_hours = models.CharField(_("Regular Hours"), max_length=50, blank=True)
 
-    in_time = models.TimeField(_("In Time"), auto_now=False, auto_now_add=False)
+    in_time = models.TimeField(_("In Time"), auto_now=False, auto_now_add=False, null=True)
 
-    out_time = models.TimeField(_("Out Time"), auto_now=False, auto_now_add=False)
+    out_time = models.TimeField(_("Out Time"), auto_now=False, auto_now_add=False, null=True)
 
     work_from_home = models.BooleanField(_("Work From Home"), default=False)
 

@@ -40,7 +40,7 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             day = date.strftime("%A")
             data = Attendance.objects.create(
                 user=self.request.user, day=day, date=date,
-                in_time=datetime.time(hour=00, minute=00, second=00), out_time=datetime.time(hour=00, minute=00, second=00),
+                in_time=None, out_time=None,
                 status='Absent',
             )
             data.save()
@@ -58,7 +58,7 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 attendance_create_view = AttendanceCreateView.as_view()
 
 
-class AttendaceTableView(SingleTableView):
+class AttendaceTableView(LoginRequiredMixin, SingleTableView):
     model = Attendance
     table_class = AttendanceTable
     template_name = "attendance/attendance_table.html"
