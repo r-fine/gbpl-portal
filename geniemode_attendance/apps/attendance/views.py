@@ -29,21 +29,22 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.status = 'Present'
 
         # Bulk create previuos absents
-        previous = Attendance.objects.filter(user=self.request.user).order_by('-id')[0]
-        previous_date = previous.date
-        current_date = datetime.date.today()
-        diff = current_date - previous_date
-        days_diff = diff.days  # type: int
+        previous = Attendance.objects.filter(user=self.request.user).order_by('-id')[0] if Attendance.objects.filter(user=self.request.user).exists() else None
+        if previous:
+            previous_date = previous.date
+            current_date = datetime.date.today()
+            diff = current_date - previous_date
+            days_diff = diff.days  # type: int
 
-        for i in range(days_diff-1, 0, -1):
-            date = datetime.date.today() - datetime.timedelta(days=i)
-            day = date.strftime("%A")
-            data = Attendance.objects.create(
-                user=self.request.user, day=day, date=date,
-                in_time=None, out_time=None,
-                status='Absent',
-            )
-            data.save()
+            for i in range(days_diff-1, 0, -1):
+                date = datetime.date.today() - datetime.timedelta(days=i)
+                day = date.strftime("%A")
+                data = Attendance.objects.create(
+                    user=self.request.user, day=day, date=date,
+                    in_time=None, out_time=None,
+                    status='Absent',
+                )
+                data.save()
 
         return super().form_valid(form)
 
