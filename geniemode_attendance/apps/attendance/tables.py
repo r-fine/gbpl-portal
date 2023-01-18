@@ -23,23 +23,24 @@ class AttendanceTable(tables.Table):
         )
     )
     date = tables.Column(orderable=True)
+    created_at = tables.Column(orderable=True)
 
     class Meta:
         model = Attendance
         tempplate_name = 'django_tables2/bootstrap4.html'
         fields = (
-            'id', 'day', 'date', 'in_time', 'out_time', 'work_from_home', 'out_office_from', 'out_office_to', 'out_reason', 'status', 'remarks', 'update',
+            'day', 'date', 'in_time', 'out_time', 'work_from_home', 'out_office_from', 'out_office_to', 'out_reason', 'status', 'remarks', 'update', 'created_at',
         )
         attrs = {
             'class': 'table table-striped table-hover',
             'id': 'myTable',
         }
-        order_by = 'id'
         orderable = False
+        order_by = 'created_at'
 
     def before_render(self, request):
         """
         A way to hook into the moment just before rendering the template.
         Can be used to hide a column.
         """
-        return self.columns.hide('id')
+        return self.columns.hide('created_at')
