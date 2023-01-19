@@ -11,9 +11,10 @@ from django_tables2 import SingleTableView, LazyPaginator
 from .forms import AttendaceForm
 from .models import Attendance
 from .tables import AttendanceTable
-from .utils import get_week_of_month
+from .utils import get_week_of_month, bulk_create_previuos_absents
 
 import datetime
+import calendar
 
 
 class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -29,23 +30,7 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.is_present = True
         form.instance.status = 'Present'
 
-        # Bulk create previuos absents
-        previous = Attendance.objects.filter(user=self.request.user).order_by('-id')[0] if Attendance.objects.filter(user=self.request.user).exists() else None
-        if previous:
-            previous_date = previous.date
-            current_date = datetime.date.today()
-            diff = current_date - previous_date
-            days_diff = diff.days  # type: int
-
-            for i in range(days_diff-1, 0, -1):
-                date = datetime.date.today() - datetime.timedelta(days=i)
-                day = date.strftime("%A")
-                data = Attendance.objects.create(
-                    user=self.request.user, day=day, date=date,
-                    in_time=None, out_time=None,
-                    status='Absent',
-                )
-                data.save()
+        bulk_create_previuos_absents(self, Attendance)
 
         return super().form_valid(form)
 
@@ -97,13 +82,15 @@ class AttendaceTableView(LoginRequiredMixin, SingleTableView):
     model = Attendance
     table_class = AttendanceTable
     template_name = "attendance/attendance_table.html"
-    paginator_class = LazyPaginator
-    table_pagination = {
-        "per_page": 30
-    }
 
     def get_table_data(self):
         return Attendance.objects.filter(user=self.request.user)
+
+    def get_table_pagination(self, table):
+        current_date = datetime.datetime.now()
+        days_in_month = calendar.monthrange(year=current_date.year, month=current_date.month)[1]
+
+        return {"per_page": days_in_month}
 
 
 attendance_table_view = AttendaceTableView.as_view()
