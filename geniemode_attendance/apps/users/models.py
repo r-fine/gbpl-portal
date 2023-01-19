@@ -19,8 +19,8 @@ class User(AbstractUser):
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
     email = models.EmailField(_("E-mail Address"), unique=True)
     phone = models.CharField(_("Phone Number"), max_length=11, null=True)
-    designation = models.CharField(_("Department"), choices=DESIGNATION, max_length=50, null=True)
     department = models.CharField(_("Department"), choices=DEPARTMENTS, max_length=50, null=True)
+    designation = models.CharField(_("Designation"), choices=DESIGNATION, max_length=50, null=True)
     profile_pic = models.ImageField(
         verbose_name='Profile Picture',
         upload_to="images/",
