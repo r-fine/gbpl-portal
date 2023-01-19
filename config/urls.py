@@ -5,10 +5,10 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
-from geniemode_attendance.apps.attendance.views import attendance_table_view
+from geniemode_attendance.apps.attendance.views import attendance_summary
 
 urlpatterns = [
-    path("", attendance_table_view , name="home"),
+    path("", attendance_summary , name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

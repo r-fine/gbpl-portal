@@ -1,6 +1,48 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-    {% include '../attendance/attendance_table.html' %}
-{% endblock content %}
-    
+<div class="container my-5">
+    <h2 class="text-primary text-center fw-bolder mb-3">This Month's Summary</h2>
+    <div class="row row-cols-md-3 justify-content-center gx-5">
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white mb-5" style="height: 180px; background-color: #7898ff;">
+                    <div class="card-header">
+                        <h4 class="card-title">Total Present</h4>
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <h1 class="card-title">{{ present }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white mb-5" style="height: 180px; background-color: #7abecc">
+                    <div class="card-header">
+                        <h4 class="card-title">Total Absent</h4>
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <h1 class="card-title">{{ absent }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white mb-5" style="height: 180px; background-color: #7CD1C0;">
+                    <div class="card-header">
+                        <h4 class="card-title">Total WFH</h4>
+                    </div>
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <h1 class="card-title">{{ wfh }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="text-primary text-center fw-bolder mb-3" href="{% url 'attendance:table' %}"{{pages}}>
+        <h5>see history</h5>
+    </a>
+</div>
+{% endblock %}

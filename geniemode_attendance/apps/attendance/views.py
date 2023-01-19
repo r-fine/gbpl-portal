@@ -11,6 +11,7 @@ from django_tables2 import SingleTableView, LazyPaginator
 from .forms import AttendaceForm
 from .models import Attendance
 from .tables import AttendanceTable
+from .utils import get_week_of_month
 
 import datetime
 
@@ -106,3 +107,26 @@ class AttendaceTableView(LoginRequiredMixin, SingleTableView):
 
 
 attendance_table_view = AttendaceTableView.as_view()
+
+
+def attendance_summary(request):
+    current_date = datetime.datetime.now()
+    current_month = current_date.month
+
+    present_current_month = Attendance.objects.filter(
+        user_id=request.user.id, date__month=current_month, status='Present',
+    ).count()
+    absent_current_month = Attendance.objects.filter(
+        user_id=request.user.id, date__month=current_month, status='Absent',
+    ).count()
+    wfh_current_month = Attendance.objects.filter(
+        user_id=request.user.id, date__month=current_month, work_from_home=True,
+    ).count()
+
+    context = {
+        'present': present_current_month,
+        'absent': absent_current_month,
+        'wfh': wfh_current_month,
+    }
+
+    return render(request, 'pages/home.html', context)
