@@ -32,7 +32,7 @@
             <div class="col-md">
                 <div class="card text-center text-white mb-5" style="height: 180px; background-color: #7CD1C0;">
                     <div class="card-header">
-                        <h4 class="card-title">Total WFH</h4>
+                        <h4 class="card-title">Total Work From Home</h4>
                     </div>
                     <div class="card-body d-flex justify-content-center align-items-center">
                         <h1 class="card-title">{{ wfh }}</h1>
@@ -41,8 +41,15 @@
             </div>
         </div>
     </div>
-    <a class="text-primary text-center fw-bolder mb-3" href="{% url 'attendance:table' %}"{{pages}}>
-        <h5>see history</h5>
-    </a>
+    <div>
+        <a class="text-primary text-center text-decoration-none fw-bolder mb-5" href="{% url 'attendance:table' %}">
+            <h5>see history</h5>
+        </a>
+    </div>
+    <div>
+        <a class="text-success text-center text-decoration-none fw-bolder mt-5" href="{% url 'attendance:view_pdf' %}">
+            <h6>download monthly report</h6>
+        </a>
+    </div>
 </div>
 {% endblock %}

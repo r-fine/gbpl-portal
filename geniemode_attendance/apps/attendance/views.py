@@ -1,10 +1,12 @@
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
+from django.template.loader import render_to_string
+from weasyprint import HTML, CSS
 
 from django_tables2 import SingleTableView, LazyPaginator
 
@@ -55,7 +57,7 @@ class AttendanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessa
     model = Attendance
     form_class = AttendaceForm
     success_url = reverse_lazy('home')
-    success_message = 'Eentry updated successfully'
+    success_message = 'Entry updated successfully'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -117,3 +119,40 @@ def attendance_summary(request):
     }
 
     return render(request, 'pages/home.html', context)
+
+
+def view_pdf(request, template="attendance/pdf_template.html"):
+    current_date = datetime.datetime.now()
+    current_month = current_date.month
+
+    present_current_month = Attendance.objects.filter(
+        user_id=request.user.id, date__month=current_month, status='Present',
+    ).count()
+    absent_current_month = Attendance.objects.filter(
+        user_id=request.user.id, date__month=current_month, status='Absent',
+    ).count()
+    wfh_current_month = Attendance.objects.filter(
+        user_id=request.user.id, date__month=current_month, work_from_home=True,
+    ).count()
+
+    context = {
+        'name': request.user.name,
+        'department': request.user.department,
+        'designation': request.user.designation,
+        'phone': request.user.phone,
+        'data': Attendance.objects.filter(user_id=request.user.id, date__month=current_month).order_by('created_at'),
+        'month': datetime.datetime.now().strftime("%B"),
+        'present': present_current_month,
+        'absent': absent_current_month,
+        'wfh': wfh_current_month,
+    }
+
+    pdf_html = render_to_string(template, context)
+    pdf_file = HTML(string=pdf_html, base_url=request.build_absolute_uri()).write_pdf(
+        stylesheets=[CSS('geniemode_attendance/static/css/bootstrap.min.css')])
+
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    filename = f"{request.user.name}_{current_date.strftime('%B')}_{current_date.strftime('%Y')}"
+    response['Content-Disposition'] = "filename=%s" % (filename)
+
+    return response
