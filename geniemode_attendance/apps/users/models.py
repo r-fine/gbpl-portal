@@ -16,7 +16,7 @@ class User(AbstractUser):
     """
 
     #: First and last name do not cover name patterns around the globe
-    name = models.CharField(_("Name of User"), blank=True, max_length=255)
+    name = models.CharField(_("Full Name of User"), blank=True, max_length=255)
     email = models.EmailField(_("E-mail Address"), unique=True)
     phone = models.CharField(_("Phone Number"), max_length=11, null=True)
     department = models.CharField(_("Department"), choices=DEPARTMENTS, max_length=50, null=True)
