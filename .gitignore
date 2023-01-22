@@ -279,3 +279,5 @@ geniemode_attendance/media/
 # DB
 db.sqlite3
 db.sqlite3-journal
+
+.env
