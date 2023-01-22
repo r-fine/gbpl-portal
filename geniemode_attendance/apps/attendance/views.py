@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
 from weasyprint import HTML, CSS
@@ -98,6 +99,7 @@ class AttendaceTableView(LoginRequiredMixin, SingleTableView):
 attendance_table_view = AttendaceTableView.as_view()
 
 
+@login_required
 def attendance_summary(request):
     current_date = datetime.datetime.now()
     current_month = current_date.month
@@ -121,6 +123,7 @@ def attendance_summary(request):
     return render(request, 'pages/home.html', context)
 
 
+@login_required
 def view_pdf(request, template="attendance/pdf_template.html"):
     current_date = datetime.datetime.now()
     current_month = current_date.month
