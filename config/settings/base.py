@@ -83,7 +83,7 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     # "allauth.socialaccount",
-    "widget_tweaks",
+    # "widget_tweaks",
     "django_tables2",
 ]
 

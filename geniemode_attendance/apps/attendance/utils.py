@@ -12,7 +12,7 @@ def get_week_of_month(year, month, day):
     return (week_of_month)
 
 
-def bulk_create_previuos_absents(self, model):
+def bulk_create_previuos_records(self, model):
     previous = model.objects.filter(user=self.request.user).order_by(
         '-id')[0] if model.objects.filter(user=self.request.user).exists() else None
     if previous:

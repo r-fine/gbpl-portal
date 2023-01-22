@@ -1,20 +1,19 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.template.loader import render_to_string
 from weasyprint import HTML, CSS
 
-from django_tables2 import SingleTableView, LazyPaginator
+from django_tables2 import SingleTableView
 
 from .forms import AttendaceForm
 from .models import Attendance
 from .tables import AttendanceTable
-from .utils import get_week_of_month, bulk_create_previuos_absents
+from .utils import bulk_create_previuos_records
 
 import datetime
 import calendar
@@ -33,7 +32,7 @@ class AttendanceCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.is_present = True
         form.instance.status = 'Present'
 
-        bulk_create_previuos_absents(self, Attendance)
+        bulk_create_previuos_records(self, Attendance)
 
         return super().form_valid(form)
 
