@@ -6,4 +6,4 @@ gunicorn==20.1.0  # https://github.com/benoitc/gunicorn
 
 # Django
 # ------------------------------------------------------------------------------
-django-anymail[mailgun]==9.0  # https://github.com/anymail/django-anymail
+django-anymail[sendinblue]==9.0  # https://github.com/anymail/django-anymail
