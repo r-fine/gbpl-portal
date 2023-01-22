@@ -40,7 +40,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <div class="mb-1">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -115,6 +115,13 @@
     {% endblock content %}
 
   </div> <!-- /container -->
+
+  <!-- Footer -->
+  <footer class="footer py-5 mt-auto bg-light">
+    <div class="container">
+        <p class="m-0 text-center text-secondary">Copyright &copy;2023 r-fine | All Rights Reserved</p>
+    </div>
+  </footer>
 
   {% block modal %}{% endblock modal %}
 
