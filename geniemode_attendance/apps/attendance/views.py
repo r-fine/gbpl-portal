@@ -6,8 +6,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
-from weasyprint import HTML, CSS
+from django.conf import settings
 
+from weasyprint import HTML, CSS
 from django_tables2 import SingleTableView
 
 from .forms import AttendaceForm
@@ -137,6 +138,10 @@ def view_pdf(request, template="attendance/pdf_template.html"):
         user_id=request.user.id, date__month=current_month, work_from_home=True,
     ).count()
 
+    logo_path = settings.STATIC_ROOT + '/images/MainLogoMinified.png'
+    css_path = settings.STATIC_ROOT + '/css/bootstrap.min.css'
+
+
     context = {
         'name': request.user.name,
         'department': request.user.department,
@@ -147,11 +152,12 @@ def view_pdf(request, template="attendance/pdf_template.html"):
         'present': present_current_month,
         'absent': absent_current_month,
         'wfh': wfh_current_month,
+        'logo': logo_path,
     }
 
     pdf_html = render_to_string(template, context)
     pdf_file = HTML(string=pdf_html, base_url=request.build_absolute_uri()).write_pdf(
-        stylesheets=[CSS('geniemode_attendance/static/css/bootstrap.min.css')])
+        stylesheets=[CSS(css_path)])
 
     response = HttpResponse(pdf_file, content_type='application/pdf')
     filename = f"{request.user.name}_{current_date.strftime('%B')}_{current_date.strftime('%Y')}"
