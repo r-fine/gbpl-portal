@@ -4,8 +4,14 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
-DEPARTMENTS = (('A', 'A'), ('B', 'B'), ('C', 'C'),)
-DESIGNATION = (('X', 'X'), ('Y', 'Y'), ('Z', 'Z'),)
+DEPARTMENTS = (
+    ('ALL', 'All'), ('Operation', 'Operation'), ('Design & Business Development',
+                                                 'Design & Business Development'), ('Merchandising', 'Merchandising'),
+)
+DESIGNATION = (
+    ('Vice President', 'Vice President'), ('Business Head', 'Business Head'), ('Merchandising Manager', 'Merchandising Manager'), ('Merchandiser', 'Merchandiser'), ('Assistant Merchandiser',
+                                                                                                                                                                     'Assistant Merchandiser'), ('Trainee Merchandiser', 'Trainee Merchandiser'), ('Senior Merchandiser', 'Senior Merchandiser'), ('Assistant Merchandiser officer', 'Assistant Merchandiser officer'),
+)
 
 
 class User(AbstractUser):
@@ -16,7 +22,7 @@ class User(AbstractUser):
     """
 
     #: First and last name do not cover name patterns around the globe
-    name = models.CharField(_("Full Name of User"), blank=True, max_length=255)
+    name = models.CharField(_("Full Name of Employee"), blank=True, max_length=255)
     email = models.EmailField(_("E-mail Address"), unique=True)
     phone = models.CharField(_("Phone Number"), max_length=11, null=True)
     department = models.CharField(_("Department"), choices=DEPARTMENTS, max_length=50, null=True)
@@ -30,13 +36,7 @@ class User(AbstractUser):
     last_name = None  # type: ignore
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['password']
 
-    def get_absolute_url(self):
-        """Get url for user's detail view.
 
-        Returns:
-            str: URL for user detail.
-
-        """
-        return reverse("users:detail", kwargs={"username": self.username})
+User._meta.get_field('username').blank = True
