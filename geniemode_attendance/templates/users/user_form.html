@@ -26,12 +26,12 @@
           </div>
         </form>
         <div class="d-flex justify-content-between mt-3">
-          <div><a href="{% url 'account_change_password' %}" class="text-decoration-none">change password?</a>
+          <div>
+            <a href="{% url 'account_change_password' %}" class="text-decoration-none">change password?</a>
           </div>
-          <div><a href="{% url 'account_email' %}" class="text-decoration-none">add/remove email</a></div>
-        </div>
-        <div class="d-flex justify-content-end mt-3">
-          <div>Last Login: <span class="text-primary">{{ user.last_login }}</span></div>
+          <div>
+            Last Login: <span class="text-primary">{{ user.last_login }}
+          </div>
         </div>
       </div>
     </div>
