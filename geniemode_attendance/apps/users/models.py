@@ -38,5 +38,8 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
+    def get_absolute_url(self):
+        return reverse('users:update')
+
 
 User._meta.get_field('username').blank = True
