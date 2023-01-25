@@ -1,9 +1,6 @@
 from django.urls import path
 
-from geniemode_attendance.apps.users.views import (
-    user_redirect_view,
-    user_update_view,
-)
+from geniemode_attendance.apps.users.views import user_redirect_view, user_update_view
 
 app_name = "users"
 urlpatterns = [

@@ -1,15 +1,19 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-from django.urls import reverse
-
 from uuid import uuid4
+
+from django.db import models
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from geniemode_attendance.apps.users.models import User
 
-
 DAYS = (
-    ('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday',
-                                                                               'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'),
+    ("Monday", "Monday"),
+    ("Tuesday", "Tuesday"),
+    ("Wednesday", "Wednesday"),
+    ("Thursday", "Thursday"),
+    ("Friday", "Friday"),
+    ("Saturday", "Saturday"),
+    ("Sunday", "Sunday"),
 )
 
 
@@ -17,7 +21,7 @@ class Attendance(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
-    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE)
 
     day = models.CharField(_("Day"), choices=DAYS, max_length=10)
 
@@ -25,15 +29,23 @@ class Attendance(models.Model):
 
     regular_hours = models.CharField(_("Regular Hours"), max_length=50, blank=True)
 
-    in_time = models.TimeField(_("In Time"), auto_now=False, auto_now_add=False, null=True)
+    in_time = models.TimeField(
+        _("In Time"), auto_now=False, auto_now_add=False, null=True
+    )
 
-    out_time = models.TimeField(_("Out Time"), auto_now=False, auto_now_add=False, null=True)
+    out_time = models.TimeField(
+        _("Out Time"), auto_now=False, auto_now_add=False, null=True
+    )
 
     work_from_home = models.BooleanField(_("Work From Home"), default=False)
 
-    out_office_from = models.TimeField(_("Out Office From"), auto_now=False, auto_now_add=False, blank=True, null=True)
+    out_office_from = models.TimeField(
+        _("Out Office From"), auto_now=False, auto_now_add=False, blank=True, null=True
+    )
 
-    out_office_to = models.TimeField(_("Out Office To"), auto_now=False, auto_now_add=False, blank=True, null=True)
+    out_office_to = models.TimeField(
+        _("Out Office To"), auto_now=False, auto_now_add=False, blank=True, null=True
+    )
 
     out_reason = models.CharField(_("Out Reason"), max_length=255, blank=True)
 
@@ -41,7 +53,9 @@ class Attendance(models.Model):
 
     remarks = models.CharField(_("Remarks"), max_length=255, blank=True)
 
-    created_at = models.DateTimeField(_("Entry Created At"), auto_now_add=True, editable=False)
+    created_at = models.DateTimeField(
+        _("Entry Created At"), auto_now_add=True, editable=False
+    )
 
     updated_at = models.DateTimeField(_("Entry Updated"), auto_now=True)
 
@@ -49,11 +63,11 @@ class Attendance(models.Model):
 
     class Meta:
 
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
 
     def __str__(self):
 
         return self.user.name
 
     def get_update_url(self):
-        return reverse('attendance:update', args=[self.pk])
+        return reverse("attendance:update", args=[self.pk])

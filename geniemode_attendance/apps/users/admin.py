@@ -3,7 +3,10 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-from geniemode_attendance.apps.users.forms import UserAdminChangeForm, UserAdminCreationForm
+from geniemode_attendance.apps.users.forms import (
+    UserAdminChangeForm,
+    UserAdminCreationForm,
+)
 
 User = get_user_model()
 
@@ -13,10 +16,24 @@ class UserAdmin(auth_admin.UserAdmin):
 
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
-    add_fieldsets = ((None, {'fields': ('email',)}),) + auth_admin.UserAdmin.add_fieldsets
+    add_fieldsets = (
+        (None, {"fields": ("email",)}),
+    ) + auth_admin.UserAdmin.add_fieldsets
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal info"), {"fields": ("name", "username", "phone", "department", "designation", "profile_pic")}),
+        (
+            _("Personal info"),
+            {
+                "fields": (
+                    "name",
+                    "username",
+                    "phone",
+                    "department",
+                    "designation",
+                    "profile_pic",
+                )
+            },
+        ),
         (
             _("Permissions"),
             {
