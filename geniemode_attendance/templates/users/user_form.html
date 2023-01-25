@@ -11,26 +11,32 @@
     <h1>User Detail - {{ user.username }}</h1>
     <img src="{{ object.profile_pic.url }}" class="card-img-top mb-5 mb-md-0" alt="profile picture" style="aspect-ratio:1;width:130px;>
   </div>
-    
 
+  
 <div class="container">
-    <div style="max-width: 550px;">
-      <div class="card-body">
-        <form class=" form-horizontal" method="post" action="{% url 'users:update' %}" enctype='multipart/form-data'>
-          {% csrf_token %}
-          {{ form|crispy }}
-          <div class="control-group">
-            <div class="controls">
-              <button type="submit" class="btn btn-primary">Update</button>
+      <div style="max-width: 550px;">
+        <div class="card-body">
+          <form class=" form-horizontal" method="post" action="{% url 'users:update' %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="control-group">
+              <div class="controls">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </div>
+          </form>
+          <div class="d-flex justify-content-between mt-3">
+            <div>
+              <a href="{% url 'account_change_password' %}" class="text-decoration-none">change password?</a>
+            </div>
+            <div>
+              <a href="{% url 'account_email' %}" class="text-decoration-none">add/remove email</a>
             </div>
           </div>
-        </form>
-        <div class="d-flex justify-content-between mt-3">
-          <div>
-            <a href="{% url 'account_change_password' %}" class="text-decoration-none">change password?</a>
-          </div>
-          <div>
-            Last Login: <span class="text-primary">{{ user.last_login }}
+          <div class="d-flex justify-content-end mt-3">
+            <div>
+              Last Login: <span class="text-primary">{{ user.last_login }}</span>
+            </div>
           </div>
         </div>
       </div>
