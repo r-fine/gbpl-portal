@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    Greetings from {{ site_name }}.
+    <br />
+    <br />
+    This is a gentle reminder that you didn't record your attendance today using the {{ site_name }}.
+    <br />
+    <br />
+    Please note that if you don't record your attendance by 11:59 PM, you will be counted as absent for today.
+    <br />
+    <br />
+    So, we highly suggests you to record your attendance timely to avoid any unwanted circumstances.
+    <br />
+    <br />
+    <a href="{{ create_attendance_url }}">Click here</a> to submit you attendance for today.
+    <br />
+    <br />
+    Thanks.
+  </body>
+</html>
