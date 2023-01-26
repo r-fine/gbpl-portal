@@ -12,6 +12,7 @@
 
 import os
 import sys
+
 import django
 
 if os.getenv("READTHEDOCS", default=False) == "True":
@@ -26,7 +27,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "Geniemode Attendance"
+project = "GBPL Attendance Portal"
 copyright = """2023, r-fine"""
 author = "r-fine"
 
