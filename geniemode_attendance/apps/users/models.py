@@ -47,10 +47,11 @@ class User(AbstractUser):
     last_name = None  # type: ignore
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["password"]
+    REQUIRED_FIELDS = ["username"]
 
     def get_absolute_url(self):
         return reverse("users:update")
 
 
 User._meta.get_field("username").blank = True
+User._meta.get_field("username").null = True
