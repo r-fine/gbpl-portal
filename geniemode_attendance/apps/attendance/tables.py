@@ -44,7 +44,7 @@ class AttendanceTable(tables.Table):
         }
         orderable = False
 
-    #     order_by = "created_at"
+        order_by = "-date"
 
     # def before_render(self, request):
     #     """
