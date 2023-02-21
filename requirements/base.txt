@@ -6,6 +6,9 @@ whitenoise==6.3.0  # https://github.com/evansd/whitenoise
 redis==4.4.1  # https://github.com/redis/redis-py
 hiredis==2.2.2  # https://github.com/redis/hiredis-py
 numpy==1.24.1
+redis==4.5.1  # https://github.com/redis/redis-py
+hiredis==2.2.2  # https://github.com/redis/hiredis-py
+numpy==1.24.2
 weasyprint==57.2
 
 # Django
@@ -14,7 +17,7 @@ django==4.1.7  # pyup: < 4.1  # https://www.djangoproject.com/
 django-environ==0.9.0  # https://github.com/joke2k/django-environ
 django-model-utils==4.3.1  # https://github.com/jazzband/django-model-utils
 django-allauth==0.52.0  # https://github.com/pennersr/django-allauth
-django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
+django-crispy-forms==2.0  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==0.7  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
 django-tables2==2.5.1
